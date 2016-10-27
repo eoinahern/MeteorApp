@@ -8,7 +8,6 @@ import java.util.List;
  * Created by eoin_a on 24/10/2016.
  */
 
-public interface MereorRepo {
-
+public interface MeteorRepo {
     List<Meteor> getData();
 }
