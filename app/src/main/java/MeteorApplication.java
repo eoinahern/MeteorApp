@@ -1,5 +1,9 @@
 import android.app.Application;
 
+import com.example.eoin_a.meteorapp.Presentation.DI.Components.AppComponent;
+import com.example.eoin_a.meteorapp.Presentation.DI.Components.DaggerAppComponent;
+import com.example.eoin_a.meteorapp.Presentation.DI.Modules.AppModule;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -10,12 +14,15 @@ import io.realm.RealmConfiguration;
 public class MeteorApplication extends Application {
 
     private static final String REALM_DB = "meteor.db";
+    private AppComponent appcomponent;
+
 
     @Override
     public void onCreate()
     {
         super.onCreate();
         configRealm();
+        appcomponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
     }
 
     private void configRealm()
@@ -25,8 +32,12 @@ public class MeteorApplication extends Application {
                 .build();
 
         Realm.setDefaultConfiguration(realmconfig);
-
-        //realm = Realm.getDefaultInstance();  // to get realm in the app!!!
     }
+
+    public AppComponent getAppcomponent()
+    {
+        return appcomponent;
+    }
+
 
 }

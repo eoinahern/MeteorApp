@@ -2,13 +2,15 @@ package com.example.eoin_a.meteorapp.Data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmModel;
 import io.realm.RealmObject;
+import io.realm.annotations.RealmClass;
 
 /**
  * Created by eoin_a on 24/10/2016.
  */
 
-public class Meteor extends RealmObject implements Comparable<Meteor> {
+public class Meteor extends RealmObject implements Comparable<Meteor>{
 
     @SerializedName("mass")
     private float mass;
@@ -20,7 +22,7 @@ public class Meteor extends RealmObject implements Comparable<Meteor> {
     private String year;
 
     @SerializedName("geolocation")
-    private GeoLocation geoloacation;
+    private GeoLocation geolocation;
 
     public Meteor()
     {
@@ -41,7 +43,7 @@ public class Meteor extends RealmObject implements Comparable<Meteor> {
     }
 
     public GeoLocation getGeoloacation() {
-        return geoloacation;
+        return geolocation;
     }
 
     @Override

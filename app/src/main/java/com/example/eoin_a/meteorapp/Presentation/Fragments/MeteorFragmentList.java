@@ -3,6 +3,7 @@ package com.example.eoin_a.meteorapp.Presentation.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,14 @@ import com.example.eoin_a.meteorapp.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class MeteorFragmentList extends Fragment implements MainView {
 
-   // @BindView(R.id.progbar)
-     ProgressBar progbar;
-
-
+    @BindView(R.id.progbar) ProgressBar progbar;
+    @BindView(R.id.recycler_view) RecyclerView recview;
 
     public static MeteorFragmentList getInst()
     {
@@ -30,10 +32,10 @@ public class MeteorFragmentList extends Fragment implements MainView {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_meteor_fragment_list, container, false);
+        ButterKnife.bind(this, v);
         return v;
     }
 
@@ -46,6 +48,13 @@ public class MeteorFragmentList extends Fragment implements MainView {
             }
 
         progbar.setVisibility(View.INVISIBLE);
+    }
+
+
+
+    @Override
+    public void showError() {
+
     }
 
     @Override

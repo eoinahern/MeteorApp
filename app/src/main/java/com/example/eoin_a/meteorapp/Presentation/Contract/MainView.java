@@ -10,5 +10,6 @@ import java.util.List;
 
 public interface MainView {
     void showloading(boolean loading);
+    void showError();
     void displayMeteorList(List<Meteor> meteorlst);
 }
