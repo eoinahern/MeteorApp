@@ -55,4 +55,20 @@ public class Meteor extends RealmObject implements Comparable<Meteor>{
 
         return 0;
     }
+
+    public void setMass(float mass) {
+        this.mass = mass;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public void setGeolocation(GeoLocation geolocation) {
+        this.geolocation = geolocation;
+    }
 }

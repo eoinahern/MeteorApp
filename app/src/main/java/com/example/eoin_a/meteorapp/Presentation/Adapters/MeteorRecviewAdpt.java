@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by eoin_a on 29/10/2016.
  */
-public class MeteorRecviewAdpt extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MeteorRecviewAdpt /*extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Meteor> meteorlist;
 
@@ -49,5 +49,5 @@ public class MeteorRecviewAdpt extends RecyclerView.Adapter<RecyclerView.ViewHol
         public MeteorViewHolder(View itemView) {
             super(itemView);
         }
-    }
-}
+    }*/
+{}

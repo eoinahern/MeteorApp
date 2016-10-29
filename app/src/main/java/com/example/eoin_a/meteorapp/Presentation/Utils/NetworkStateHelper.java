@@ -21,7 +21,7 @@ public class NetworkStateHelper {
     public NetworkStateHelper(Context cont)
     {
         this.cont = cont;
-        cm = (ConnectivityManager)cont.getSystemService(Context.CONNECTIVITY_SERVICE);
+        cm = (ConnectivityManager) cont.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
 

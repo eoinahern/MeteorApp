@@ -3,6 +3,9 @@ package com.example.eoin_a.meteorapp.Presentation.DI.Modules;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.eoin_a.meteorapp.Presentation.Utils.NetworkStateHelper;
+
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -28,6 +31,15 @@ public class AppModule {
     public Context getCont()
     {
         return myapp;
+    }
+
+
+    @Singleton
+    @Provides
+    @Named("netHelper")
+    public NetworkStateHelper getNetStateHelper(Context cont)
+    {
+        return new NetworkStateHelper(cont);
     }
 
 
