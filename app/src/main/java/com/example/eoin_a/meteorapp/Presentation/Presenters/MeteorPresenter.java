@@ -8,6 +8,7 @@ import com.example.eoin_a.meteorapp.Presentation.Contract.MainView;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Created by eoin_a on 28/10/2016.
@@ -19,7 +20,7 @@ public class MeteorPresenter implements MainPresenter {
     private MeteorRepo  mrepo;
 
     @Inject
-    public MeteorPresenter(MeteorRepo mrepo)
+    public MeteorPresenter(@Named("meteorrepo") MeteorRepo mrepo)
     {
         this.mrepo = mrepo;
     }

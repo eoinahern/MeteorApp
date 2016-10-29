@@ -14,33 +14,33 @@ import dagger.Provides;
 /**
  * Created by eoin_a on 28/10/2016.
  */
-@Singleton
+
 @Module
 public class AppModule {
 
 
     private Application myapp;
-
     public AppModule(Application myapp)
     {
         this.myapp = myapp;
     }
 
-    @Singleton
+
+
     @Provides
     public Context getCont()
     {
-        return myapp;
+        return myapp.getBaseContext();
     }
 
 
-    @Singleton
+    /*@Singleton
     @Provides
     @Named("netHelper")
     public NetworkStateHelper getNetStateHelper(Context cont)
     {
         return new NetworkStateHelper(cont);
-    }
+    }*/
 
 
 

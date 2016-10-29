@@ -1,21 +1,18 @@
+package com.example.eoin_a.meteorapp;
+
 import android.app.Application;
 
 import com.example.eoin_a.meteorapp.Presentation.DI.Components.AppComponent;
 import com.example.eoin_a.meteorapp.Presentation.DI.Components.DaggerAppComponent;
 import com.example.eoin_a.meteorapp.Presentation.DI.Modules.AppModule;
-
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-/**
- * Created by eoin_a on 24/10/2016.
- */
 
-public class MeteorApplication extends Application {
+public class MeteorApplication extends android.app.Application{
 
     private static final String REALM_DB = "meteor.db";
     private AppComponent appcomponent;
-
 
     @Override
     public void onCreate()
@@ -38,6 +35,5 @@ public class MeteorApplication extends Application {
     {
         return appcomponent;
     }
-
 
 }

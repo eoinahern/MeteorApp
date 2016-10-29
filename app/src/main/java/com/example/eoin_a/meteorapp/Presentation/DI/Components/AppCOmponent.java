@@ -14,11 +14,7 @@ import dagger.Component;
  */
 
 
-@Singleton
 @Component(modules = AppModule.class)
 public interface AppComponent {
-
-    //provided to submodules.
     Context cont();
-    NetworkStateHelper netHelper();
 }

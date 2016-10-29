@@ -1,6 +1,4 @@
 package com.example.eoin_a.meteorapp.Presentation.Presenters;
-
-import com.example.eoin_a.meteorapp.Data.MeteorRepoImp;
 import com.example.eoin_a.meteorapp.Data.entity.Meteor;
 import com.example.eoin_a.meteorapp.Domain.MeteorRepo;
 import com.example.eoin_a.meteorapp.Presentation.Contract.MainView;
@@ -32,7 +30,6 @@ public class MeteorPresenterTest {
         MockitoAnnotations.initMocks(this);
         mpresenter = new MeteorPresenter(mockmrepo);
         mpresenter.setView(mview);
-
     }
 
     @Test

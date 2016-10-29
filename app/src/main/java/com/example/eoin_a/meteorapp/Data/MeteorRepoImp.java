@@ -27,7 +27,7 @@ public class MeteorRepoImp implements MeteorRepo {
     private NetworkStateHelper nshelper;
     private List<Meteor> meteorList;
 
-    @Inject
+
     public MeteorRepoImp(DBHelper dbhelper, ServiceImp webservice, NetworkStateHelper nshelper)
     {
         this.dbhelper = dbhelper;

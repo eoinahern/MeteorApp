@@ -1,6 +1,7 @@
 package com.example.eoin_a.meteorapp.Presentation.Fragments;
 
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.app.Application;
 import com.example.eoin_a.meteorapp.Data.entity.Meteor;
+import com.example.eoin_a.meteorapp.MeteorApplication;
 import com.example.eoin_a.meteorapp.Presentation.Adapters.MeteorRecviewAdpt;
 import com.example.eoin_a.meteorapp.Presentation.Contract.MainView;
+
+import com.example.eoin_a.meteorapp.Presentation.DI.Components.AppComponent;
+import com.example.eoin_a.meteorapp.Presentation.DI.Components.DaggerRepoComponent;
+import com.example.eoin_a.meteorapp.Presentation.DI.Components.RepoComponent;
+import com.example.eoin_a.meteorapp.Presentation.DI.Modules.RepoModule;
 import com.example.eoin_a.meteorapp.Presentation.Presenters.MeteorPresenter;
 import com.example.eoin_a.meteorapp.R;
 
@@ -34,8 +41,26 @@ public class MeteorFragmentList extends Fragment implements MainView {
 
     public static MeteorFragmentList getInst()
     {
+
         MeteorFragmentList mfrag = new MeteorFragmentList();
         return mfrag;
+    }
+
+    @Override
+    public void onCreate(Bundle sistate) {
+        super.onCreate(sistate);
+
+        MeteorApplication mapp = (MeteorApplication) getActivity().getApplication();
+        AppComponent appcomp = mapp.getAppcomponent();
+        RepoModule repomod = new RepoModule();
+
+
+        RepoComponent repocomp = DaggerRepoComponent.builder()
+                .repoModule(repomod)
+                .appComponent(appcomp)
+                .build();
+
+        repocomp.inject(this);
     }
 
 
