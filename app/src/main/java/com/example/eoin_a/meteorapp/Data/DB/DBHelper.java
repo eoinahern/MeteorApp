@@ -13,6 +13,7 @@ public interface DBHelper {
 
     List<Meteor> getMeteorList();
     void saveMeteorList(List<Meteor> meteorlist);
+    boolean checkEmpty();
     void closeDB();
 
 }

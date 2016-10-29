@@ -38,7 +38,15 @@ public class DBHelperImp implements DBHelper {
     }
 
     @Override
+    public boolean checkEmpty() {
+        return realm.isEmpty();
+    }
+
+    @Override
     public void closeDB() {
         realm.close();
     }
+
+
+
 }
