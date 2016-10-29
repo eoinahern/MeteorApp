@@ -1,5 +1,7 @@
 package com.example.eoin_a.meteorapp.Presentation.Presenters;
 
+import android.util.Log;
+
 import com.example.eoin_a.meteorapp.Data.entity.Meteor;
 import com.example.eoin_a.meteorapp.Domain.MeteorRepo;
 import com.example.eoin_a.meteorapp.Presentation.Contract.MainPresenter;
@@ -19,6 +21,7 @@ public class MeteorPresenter implements MainPresenter {
     private MainView mview;
     private MeteorRepo  mrepo;
 
+
     @Inject
     public MeteorPresenter(@Named("meteorrepo") MeteorRepo mrepo)
     {
@@ -33,6 +36,8 @@ public class MeteorPresenter implements MainPresenter {
 
     public void GetMeteorList()
     {
+
+        Log.d("get meteor", "list called");
          mview.showloading(true);
          List<Meteor> meteorlst = mrepo.getData();
 

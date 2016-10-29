@@ -25,23 +25,11 @@ public class AppModule {
         this.myapp = myapp;
     }
 
-
-
     @Provides
     public Context getCont()
     {
         return myapp.getBaseContext();
     }
-
-
-    /*@Singleton
-    @Provides
-    @Named("netHelper")
-    public NetworkStateHelper getNetStateHelper(Context cont)
-    {
-        return new NetworkStateHelper(cont);
-    }*/
-
 
 
 }

@@ -10,13 +10,17 @@ import com.example.eoin_a.meteorapp.Domain.MeteorRepo;
 import com.example.eoin_a.meteorapp.Presentation.Utils.NetworkStateHelper;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
  * Created by eoin_a on 27/10/2016.
+ * becuase the app is small i just used the repo
+ * and didnt use a usecase implementation
+ * in the domain package. If i had been following
+ * DDD i would have had the Usecase implementation
+ * with a repo instance as a dependency within the usecase.
  */
 
 public class MeteorRepoImp implements MeteorRepo {
@@ -62,15 +66,18 @@ public class MeteorRepoImp implements MeteorRepo {
             @Override
             public void onResponse(Call call, Response res) {
 
+                Log.d("res code", String.valueOf(res.code()));
+
                 if(res.isSuccessful())
                    meteorList = (List<Meteor>) res.body();
-                else
+                else {
                     Log.e("on resp", "error");
-
+                }
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
+                    t.printStackTrace();
                     Log.e("api error", "failure");
             }
         });

@@ -1,16 +1,15 @@
 package com.example.eoin_a.meteorapp.Presentation.Fragments;
 
 
-import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.app.Application;
 import com.example.eoin_a.meteorapp.Data.entity.Meteor;
 import com.example.eoin_a.meteorapp.MeteorApplication;
 import com.example.eoin_a.meteorapp.Presentation.Adapters.MeteorRecviewAdpt;
@@ -24,9 +23,7 @@ import com.example.eoin_a.meteorapp.Presentation.Presenters.MeteorPresenter;
 import com.example.eoin_a.meteorapp.R;
 
 import java.util.List;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -37,11 +34,12 @@ public class MeteorFragmentList extends Fragment implements MainView {
     @BindView(R.id.progbar) ProgressBar progbar;
     @BindView(R.id.recycler_view) RecyclerView recview;
     @BindView(R.id.nodata) TextView nodatatxt;
+
     private MeteorRecviewAdpt meteoradpt;
+    private LinearLayoutManager llmanager;
 
     public static MeteorFragmentList getInst()
     {
-
         MeteorFragmentList mfrag = new MeteorFragmentList();
         return mfrag;
     }
@@ -50,10 +48,11 @@ public class MeteorFragmentList extends Fragment implements MainView {
     public void onCreate(Bundle sistate) {
         super.onCreate(sistate);
 
+        //bit of boilerplate involved here!!
+
         MeteorApplication mapp = (MeteorApplication) getActivity().getApplication();
         AppComponent appcomp = mapp.getAppcomponent();
         RepoModule repomod = new RepoModule();
-
 
         RepoComponent repocomp = DaggerRepoComponent.builder()
                 .repoModule(repomod)
@@ -61,16 +60,23 @@ public class MeteorFragmentList extends Fragment implements MainView {
                 .build();
 
         repocomp.inject(this);
+        llmanager = new LinearLayoutManager(getActivity().getBaseContext());
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_meteor_fragment_list, container, false);
         ButterKnife.bind(this, v);
+        mpresenter.setView(this);
         return v;
     }
+
+    @Override
+    public void onViewCreated (View view, Bundle savedInstanceState){
+        mpresenter.GetMeteorList();
+    }
+
 
     @Override
     public void showloading(boolean loading) {
@@ -91,7 +97,11 @@ public class MeteorFragmentList extends Fragment implements MainView {
 
     @Override
     public void displayMeteorList(List<Meteor> meteorlst) {
-        //send data to adapter.
+
         showloading(false);
+        nodatatxt.setVisibility(View.INVISIBLE);
+        recview.setLayoutManager(llmanager);
+        meteoradpt = new MeteorRecviewAdpt(meteorlst);
+        recview.setAdapter(meteoradpt);
     }
 }

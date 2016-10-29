@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceImp {
 
     private  final String URL = "https://data.nasa.gov/resource/";
-    private final String QUERY = "$where=year between'2013-01-01T00:00:00.000'and'2015-01-01T00:00:00.000'";
+    private final String QUERY = "year between'2013-01-01T00:00:00.000' and '2014-01-01T00:00:00.000'";
     private Service service;
 
 
