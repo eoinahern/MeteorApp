@@ -21,8 +21,15 @@ public class Meteor extends RealmObject implements Comparable<Meteor>{
     @SerializedName("year")
     private String year;
 
-    @SerializedName("geolocation")
-    private GeoLocation geolocation;
+
+    @SerializedName("reclat")
+    private String reclat;
+
+    @SerializedName("reclong")
+    private String reclong;
+
+    /*@SerializedName("geolocation")
+    private GeoLocation geolocation;*/
 
     public Meteor()
     {
@@ -42,9 +49,9 @@ public class Meteor extends RealmObject implements Comparable<Meteor>{
         return year;
     }
 
-    public GeoLocation getGeoloacation() {
+   /* public GeoLocation getGeoloacation() {
         return geolocation;
-    }
+    }*/
 
     @Override
     public int compareTo(Meteor o) {
@@ -68,7 +75,7 @@ public class Meteor extends RealmObject implements Comparable<Meteor>{
         this.year = year;
     }
 
-    public void setGeolocation(GeoLocation geolocation) {
+   /* public void setGeolocation(GeoLocation geolocation) {
         this.geolocation = geolocation;
-    }
+    }*/
 }

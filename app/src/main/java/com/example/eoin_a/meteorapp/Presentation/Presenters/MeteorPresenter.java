@@ -37,9 +37,10 @@ public class MeteorPresenter implements MainPresenter {
     public void GetMeteorList()
     {
 
-        Log.d("get meteor", "list called");
+         Log.d("get meteor", "list called");
          mview.showloading(true);
          List<Meteor> meteorlst = mrepo.getData();
+        Log.d("list len", String.valueOf(meteorlst.size()));
 
         if(meteorlst == null || meteorlst.size() == 0)
         {

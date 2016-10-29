@@ -1,6 +1,4 @@
 package com.example.eoin_a.meteorapp.Data;
-
-import android.app.usage.NetworkStats;
 import android.util.Log;
 
 import com.example.eoin_a.meteorapp.Data.DB.DBHelper;
@@ -68,8 +66,10 @@ public class MeteorRepoImp implements MeteorRepo {
 
                 Log.d("res code", String.valueOf(res.code()));
 
-                if(res.isSuccessful())
-                   meteorList = (List<Meteor>) res.body();
+                if(res.isSuccessful()) {
+                    meteorList = (List<Meteor>) res.body();
+                    Log.d("list len", String.valueOf(meteorList.size()));
+                }
                 else {
                     Log.e("on resp", "error");
                 }
