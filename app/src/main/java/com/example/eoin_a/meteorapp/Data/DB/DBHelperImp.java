@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import rx.Observable;
 
 /**
  * Created by eoin_a on 24/10/2016.
@@ -22,10 +23,9 @@ public class DBHelperImp implements DBHelper {
     }
 
     @Override
-    public List<Meteor> getMeteorList() {
-
+    public Observable<List<Meteor>> getMeteorList() {
         RealmResults<Meteor> res = realm.where(Meteor.class).findAll();
-        return  res;
+        return Observable.just((List<Meteor>) res);
     }
 
     @Override

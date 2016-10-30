@@ -9,6 +9,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
 
 /**
  * Created by eoin_a on 24/10/2016.
@@ -31,27 +32,9 @@ public class ServiceImp {
         service = retrofit.create(Service.class);
     }
 
-    public Call<List<Meteor>> getMeteors()
+    public Observable<List<Meteor>> getMeteors()
     {
         return service.getMeteors(QUERY);
     }
 
-    /*call.enqueue(new Callback<List<Meteor>>() {
-        @Override
-        public void onResponse(Call<List<Meteor>> call, Response<List<Meteor>> response) {
-
-            if(response.isSuccessful())
-                meteorlist = response.body();
-            else {
-                Log.d("error response", String.valueOf(response.code()));
-                return;
-            }
-        }
-
-        @Override
-        public void onFailure(Call<List<Meteor>> call, Throwable t) {
-            t.printStackTrace();
-            return;
-        }
-    });*/
 }

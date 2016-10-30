@@ -9,6 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import rx.Observable;
 
 /**
  * Created by eoin_a on 24/10/2016.
@@ -20,5 +21,7 @@ public interface Service {
 
     @Headers("X-App-Token: mZyaAGNlMXuvvJlqBqsCzdPDX")
     @GET("y77d-th95.json")
-    Call<List<Meteor>> getMeteors(@Query("$where") String query);
+    Observable<List<Meteor>> getMeteors(@Query("$where") String query);
+
+
 }

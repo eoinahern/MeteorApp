@@ -6,11 +6,8 @@ import com.example.eoin_a.meteorapp.Data.Web.ServiceImp;
 import com.example.eoin_a.meteorapp.Data.entity.Meteor;
 import com.example.eoin_a.meteorapp.Domain.MeteorRepo;
 import com.example.eoin_a.meteorapp.Presentation.Utils.NetworkStateHelper;
-import java.util.ArrayList;
 import java.util.List;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import rx.Observable;
 
 /**
  * Created by eoin_a on 27/10/2016.
@@ -27,7 +24,7 @@ public class MeteorRepoImp implements MeteorRepo {
     private DBHelper dbhelper;
     private ServiceImp webservice;
     private NetworkStateHelper nshelper;
-    private List<Meteor> meteorList;
+    //private List<Meteor> meteorList;
 
 
     public MeteorRepoImp(DBHelper dbhelper, ServiceImp webservice, NetworkStateHelper nshelper)
@@ -35,30 +32,28 @@ public class MeteorRepoImp implements MeteorRepo {
         this.dbhelper = dbhelper;
         this.webservice = webservice;
         this.nshelper = nshelper;
-        meteorList = new ArrayList<>();
     }
 
     @Override
-    public List<Meteor> getData() {
+    public Observable<List<Meteor>> getData() {
 
+        Observable<List<Meteor>> meteorobs = null;
 
         if(!dbhelper.checkEmpty())
         {
-          meteorList  =  dbhelper.getMeteorList();
-          return meteorList;
+           meteorobs =  dbhelper.getMeteorList();
         }
 
         if(nshelper.checkNetworkConnected())
         {
-            Call call =  webservice.getMeteors();
-            meteorList = CallInitiate(call);
+            meteorobs =  webservice.getMeteors();
         }
 
-        return meteorList;
+        return meteorobs;
     }
 
 
-    private List<Meteor> CallInitiate(Call call)
+    /*private List<Meteor> CallInitiate(Call call)
     {
         call.enqueue(new Callback() {
             @Override
@@ -84,5 +79,5 @@ public class MeteorRepoImp implements MeteorRepo {
 
 
         return meteorList;
-    }
+    }*/
 }
