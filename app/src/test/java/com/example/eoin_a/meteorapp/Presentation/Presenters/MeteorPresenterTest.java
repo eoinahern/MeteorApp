@@ -4,10 +4,18 @@ import com.example.eoin_a.meteorapp.Domain.MeteorRepo;
 import com.example.eoin_a.meteorapp.Presentation.Contract.MainView;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.observers.Subscribers;
+import rx.observers.TestSubscriber;
+
+import static org.hamcrest.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.verify;
@@ -21,6 +29,7 @@ public class MeteorPresenterTest {
 
     @Mock MeteorRepo mockmrepo;
     @Mock MainView mview;
+    @Mock Observable obs;
     private MeteorPresenter mpresenter;
 
 
@@ -33,23 +42,10 @@ public class MeteorPresenterTest {
     }
 
     @Test
-    public void testMeteorList()
+    public void testUnSub()
     {
-        when(mockmrepo.getData()).thenReturn(getList());
-        mpresenter.GetMeteorList();
-        verify(mview).showloading(anyBoolean());
-        verify(mview).displayMeteorList(anyList());
-    }
-
-    @Test
-    public void testReporeturnEmpty(){
-
-        when(mockmrepo.getData()).thenReturn(new ArrayList<Meteor>());
-        mpresenter.GetMeteorList();
-
-        verify(mockmrepo).getData();
-        verify(mview).showloading(true);
-        verify(mview).showError();
+        mpresenter.Unsubscribe();
+        verify(mockmrepo).unsubscribe();
     }
 
 

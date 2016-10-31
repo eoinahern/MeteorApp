@@ -1,6 +1,4 @@
 package com.example.eoin_a.meteorapp.Presentation.Fragments;
-
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -98,10 +96,16 @@ public class MeteorFragmentList extends Fragment implements MainView {
     @Override
     public void displayMeteorList(List<Meteor> meteorlst) {
 
-        showloading(false);
         nodatatxt.setVisibility(View.INVISIBLE);
         recview.setLayoutManager(llmanager);
         meteoradpt = new MeteorRecviewAdpt(meteorlst);
         recview.setAdapter(meteoradpt);
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        mpresenter.Unsubscribe();
     }
 }

@@ -10,11 +10,21 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import retrofit2.Call;
+import rx.Observable;
+import rx.Scheduler;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.observers.TestSubscriber;
+import rx.schedulers.Schedulers;
+import rx.schedulers.TestScheduler;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -23,10 +33,11 @@ import static org.mockito.Mockito.when;
  */
 public class MeteorRepoImpTest {
 
-
     @Mock private DBHelper mockdbhelper;
     @Mock private ServiceImp mockservice;
     @Mock private NetworkStateHelper mocknetstatus;
+    private Scheduler mockmainsched;
+    private Scheduler mockthreadsched;
     @Mock Call mockcall;
 
     //class under test
@@ -35,8 +46,13 @@ public class MeteorRepoImpTest {
     @Before
     public void setup()
     {
+
+        mockmainsched = Schedulers.immediate();
+        mockthreadsched = Schedulers.immediate();
+
         MockitoAnnotations.initMocks(this);
-        meteorrepo = new MeteorRepoImp(mockdbhelper, mockservice, mocknetstatus);
+        meteorrepo = new MeteorRepoImp(mockdbhelper, mockservice,
+                mocknetstatus, mockmainsched, mockthreadsched);
     }
 
 
@@ -44,35 +60,13 @@ public class MeteorRepoImpTest {
     public void testGetDataDBhelper()
     {
         when(mockdbhelper.checkEmpty()).thenReturn(false);
-        when(mockdbhelper.getMeteorList()).thenReturn(getList());
-
-        List<Meteor> mlist = meteorrepo.getData();
-
-        verify(mockdbhelper).checkEmpty();
-        verify(mockdbhelper).getMeteorList();
-
-        Assert.assertEquals(2, mlist.size());
-        Assert.assertEquals("rome", mlist.get(0).getName());
-    }
-
-
-    //check is netstatus return network available!
-
-    @Test
-    public void testGetDataDBHelper()
-    {
-
-        when(mockdbhelper.checkEmpty()).thenReturn(false);
-        when(mockdbhelper.getMeteorList()).thenReturn(getList());
-
-        List<Meteor> mlist = meteorrepo.getData();
+        when(mockdbhelper.getMeteorList()).thenReturn(Observable.just(getList()));
+        meteorrepo.getData();
 
         verify(mockdbhelper).checkEmpty();
         verify(mockdbhelper).getMeteorList();
-
-        Assert.assertEquals(2, mlist.size());
-
     }
+
 
 
     @Test
@@ -80,13 +74,40 @@ public class MeteorRepoImpTest {
     {
         when(mockdbhelper.checkEmpty()).thenReturn(true);
         when(mocknetstatus.checkNetworkConnected()).thenReturn(true);
-        when(mockservice.getMeteors()).thenReturn(mockcall);
+        when(mockservice.getMeteors()).thenReturn(Observable.just(getList()));
 
-        List<Meteor> mlist = meteorrepo.getData();
+        Observable<List<Meteor>> mobs = meteorrepo.getData();
 
         verify(mockdbhelper).checkEmpty();
         verify(mocknetstatus).checkNetworkConnected();
         verify(mockservice).getMeteors();
+    }
+
+    @Test
+    public void testSubscription()
+    {
+
+        TestSubscriber<List<Meteor>>  testsub = new TestSubscriber<>();
+        when(mockdbhelper.checkEmpty()).thenReturn(false);
+        when(mockdbhelper.getMeteorList()).thenReturn(Observable.just(getList()));
+
+
+        meteorrepo.subscribe(testsub);
+
+        testsub.awaitTerminalEvent(5, TimeUnit.SECONDS);
+        testsub.assertNoErrors();
+        testsub.assertValueCount(1);
+
+
+        List<List<Meteor>> list = testsub.getOnNextEvents();
+        List<Meteor> mlist = list.get(0);
+
+        verify(mockdbhelper).getMeteorList();
+        verify(mockdbhelper).checkEmpty();
+
+
+        Assert.assertEquals(2, mlist.size());
+        Assert.assertEquals(12f, mlist.get(0).getMass());
     }
 
 

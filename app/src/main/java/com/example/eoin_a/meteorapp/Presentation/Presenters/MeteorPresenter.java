@@ -7,10 +7,13 @@ import com.example.eoin_a.meteorapp.Domain.MeteorRepo;
 import com.example.eoin_a.meteorapp.Presentation.Contract.MainPresenter;
 import com.example.eoin_a.meteorapp.Presentation.Contract.MainView;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import rx.Subscriber;
 
 /**
  * Created by eoin_a on 28/10/2016.
@@ -20,7 +23,6 @@ public class MeteorPresenter implements MainPresenter {
 
     private MainView mview;
     private MeteorRepo  mrepo;
-
 
     @Inject
     public MeteorPresenter(@Named("meteorrepo") MeteorRepo mrepo)
@@ -33,25 +35,42 @@ public class MeteorPresenter implements MainPresenter {
         this.mview = mview;
     }
 
-
-    //return observable!!
-
     public void GetMeteorList()
     {
-        Log.d("get meteor", "list called");
-        mview.showloading(true);
-        List<Meteor> meteorlst = mrepo.getData();
-        Log.d("list len", String.valueOf(meteorlst.size()));
-
-        if(meteorlst == null || meteorlst.size() == 0)
-        {
-            mview.showError();
-            return;
-        }
-
-        mview.displayMeteorList(meteorlst);
+        mrepo.subscribe(new MeteorSubscriber());
     }
 
 
+    public class MeteorSubscriber extends Subscriber<List<Meteor>>
+    {
+        @Override
+        public void onCompleted() {
+            mview.showloading(false);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            e.printStackTrace();
+            mview.showError();
+        }
+
+        @Override
+        public void onNext(List<Meteor> meteors) {
+
+            Log.d("len", String.valueOf(meteors.size()));
+
+            if(mrepo.checkEmpty())
+                mrepo.saveData(meteors);
+
+            Collections.sort(meteors, Collections.reverseOrder());
+            mview.displayMeteorList(meteors);
+        }
+    }
+
+
+    public void Unsubscribe()
+    {
+        mrepo.unsubscribe();
+    }
 
 }

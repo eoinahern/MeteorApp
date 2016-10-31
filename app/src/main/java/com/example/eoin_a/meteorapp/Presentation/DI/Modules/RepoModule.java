@@ -16,6 +16,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import rx.Scheduler;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by eoin_a on 29/10/2016.
@@ -23,9 +26,6 @@ import dagger.Provides;
 
 @Module
 public class RepoModule {
-
-
-
 
     @Provides
     public DBHelper getDBhelper()
@@ -41,6 +41,19 @@ public class RepoModule {
     }
 
 
+    @Provides
+    @Named("threadsched")
+    public Scheduler getthreadSchecduler()
+    {
+        return Schedulers.io();
+    }
+
+    @Provides
+    @Named("mainsched")
+    public Scheduler getMainSched()
+    {
+        return AndroidSchedulers.mainThread();
+    }
 
 
     @Provides
@@ -52,8 +65,9 @@ public class RepoModule {
     @Named("meteorrepo")
     @Provides
     public MeteorRepo getRepo( DBHelper dbhelper,  ServiceImp service,
-                             NetworkStateHelper nethelper)
+                             NetworkStateHelper nethelper,@Named("mainsched") Scheduler mainsched,
+                               @Named("threadsched") Scheduler newscheduler)
     {
-        return new MeteorRepoImp(dbhelper, service, nethelper);
+        return new MeteorRepoImp(dbhelper, service, nethelper, mainsched, newscheduler);
     }
 }

@@ -8,14 +8,13 @@ import com.example.eoin_a.meteorapp.Domain.MeteorRepo;
 import com.example.eoin_a.meteorapp.Presentation.Utils.NetworkStateHelper;
 import java.util.List;
 import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.Subscription;
 
 /**
- * Created by eoin_a on 27/10/2016.
- * becuase the app is small i just used the repo
- * and didnt use a usecase implementation
- * in the domain package. If i had been following
- * DDD i would have had the Usecase implementation
- * with a repo instance as a dependency within the usecase.
+*
+ * repo implementation
  */
 
 public class MeteorRepoImp implements MeteorRepo {
@@ -24,24 +23,30 @@ public class MeteorRepoImp implements MeteorRepo {
     private DBHelper dbhelper;
     private ServiceImp webservice;
     private NetworkStateHelper nshelper;
-    //private List<Meteor> meteorList;
+    private Scheduler mainshceduelr;
+    private Scheduler threadscheduler;
+    private Subscription subscription;
 
-
-    public MeteorRepoImp(DBHelper dbhelper, ServiceImp webservice, NetworkStateHelper nshelper)
+    public MeteorRepoImp(DBHelper dbhelper, ServiceImp webservice, NetworkStateHelper nshelper,
+                         Scheduler mainscheduler, Scheduler threadscheduler)
     {
         this.dbhelper = dbhelper;
         this.webservice = webservice;
         this.nshelper = nshelper;
+        this.mainshceduelr = mainscheduler;
+        this.threadscheduler = threadscheduler;
     }
 
     @Override
     public Observable<List<Meteor>> getData() {
 
         Observable<List<Meteor>> meteorobs = null;
+        boolean empty = checkEmpty();
 
-        if(!dbhelper.checkEmpty())
+        if(!empty)
         {
            meteorobs =  dbhelper.getMeteorList();
+           return meteorobs;
         }
 
         if(nshelper.checkNetworkConnected())
@@ -53,31 +58,40 @@ public class MeteorRepoImp implements MeteorRepo {
     }
 
 
-    /*private List<Meteor> CallInitiate(Call call)
+
+
+    /**
+     * wrapper on database
+     * @return
+     */
+
+    @Override
+    public boolean checkEmpty()
     {
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response res) {
+        return dbhelper.checkEmpty();
+    }
 
-                Log.d("res code", String.valueOf(res.code()));
+    @Override
+    public void saveData(List<Meteor> mlist)
+    {
+       dbhelper.saveMeteorList(mlist);
+    }
 
-                if(res.isSuccessful()) {
-                    meteorList = (List<Meteor>) res.body();
-                    Log.d("list len", String.valueOf(meteorList.size()));
-                }
-                else {
-                    Log.e("on resp", "error");
-                }
-            }
+    @Override
+    public void subscribe(Subscriber<List<Meteor>> sub) {
 
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                    t.printStackTrace();
-                    Log.e("api error", "failure");
-            }
-        });
+        subscription = getData().subscribeOn(threadscheduler)
+                .observeOn(mainshceduelr)
+                .subscribe(sub);
+    }
+
+    @Override
+    public void unsubscribe()
+    {
+        if(subscription != null && !subscription.isUnsubscribed())
+            subscription.unsubscribe();
+    }
 
 
-        return meteorList;
-    }*/
+
 }

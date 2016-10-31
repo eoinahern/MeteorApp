@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 
@@ -18,13 +19,14 @@ import rx.Observable;
 public class ServiceImp {
 
     private  final String URL = "https://data.nasa.gov/resource/";
-    private final String QUERY = "year between'2013-01-01T00:00:00.000' and '2014-01-01T00:00:00.000'";
+    private final String QUERY = "year between'2011-01-01T00:00:00.000' and '2016-01-01T00:00:00.000'";
     private Service service;
 
 
     public ServiceImp()
     {
         Retrofit retrofit = new Retrofit.Builder()
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
