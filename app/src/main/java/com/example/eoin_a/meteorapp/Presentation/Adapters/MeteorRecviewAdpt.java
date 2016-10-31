@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.eoin_a.meteorapp.Data.entity.Meteor;
+import com.example.eoin_a.meteorapp.Presentation.Utils.DateFormatter;
+import com.example.eoin_a.meteorapp.Presentation.Utils.StringFormatter;
 import com.example.eoin_a.meteorapp.R;
 import java.util.List;
 import butterknife.BindView;
@@ -18,10 +20,14 @@ import butterknife.ButterKnife;
 public class MeteorRecviewAdpt extends RecyclerView.Adapter<MeteorRecviewAdpt.MeteorViewHolder> {
 
     private List<Meteor> meteorlist;
+    private StringFormatter stringFormatter;
+    private DateFormatter dateformatter;
 
     public MeteorRecviewAdpt(List<Meteor> meteorlist) {
 
         this.meteorlist = meteorlist;
+        this.stringFormatter = new StringFormatter();
+        this.dateformatter = new DateFormatter();
     }
 
     @Override
@@ -35,9 +41,9 @@ public class MeteorRecviewAdpt extends RecyclerView.Adapter<MeteorRecviewAdpt.Me
 
         Meteor meteor = meteorlist.get(pos);
 
-        holder.date.setText(meteor.getYear());
+        holder.date.setText(dateformatter.shortenFormat(meteor.getYear()));
         holder.mass.setText(String.valueOf(meteor.getMass()));
-        holder.location.setText(meteor.getName());
+        holder.location.setText(stringFormatter.abbreviateString(meteor.getName()));
     }
 
     @Override
