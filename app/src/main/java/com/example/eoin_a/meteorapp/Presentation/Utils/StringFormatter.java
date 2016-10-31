@@ -21,4 +21,9 @@ public class StringFormatter {
 
         return title.substring(0,11) + "...";
     }
+
+    public char getFirstChar(String name)
+    {
+        return name.charAt(0);
+    }
 }

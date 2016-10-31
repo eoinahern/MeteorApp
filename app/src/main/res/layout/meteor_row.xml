@@ -16,13 +16,16 @@
             android:layout_height="match_parent"
             >
 
-        <ImageView
-        android:layout_width="70dp"
-        android:layout_height="60dp"
-        android:id="@+id/imview"
-        android:layout_alignParentLeft="true"
-        android:background="#000000"
-        android:layout_margin="5dp" />
+            <TextView
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:id="@+id/square_txt"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:background="@drawable/square_shape"
+            android:text= "H" android:textSize="18dp"
+            android:textColor="#ffffff"
+            android:layout_margin="5dp" />
 
 
             <TextView
@@ -33,7 +36,7 @@
                 android:layout_marginTop="5dp"
                 android:id="@+id/nametxt"
                 android:maxLength="15"
-                android:layout_toRightOf="@id/imview"
+                android:layout_toRightOf="@id/square_txt"
                 android:textColor="@color/darkGrey"
                 android:text="Name"/>
 
@@ -44,7 +47,7 @@
                 android:layout_marginLeft="5dp"
                 android:id="@+id/masstxt"
                 android:layout_below="@id/nametxt"
-                android:layout_toRightOf="@id/imview"
+                android:layout_toRightOf="@id/square_txt"
                 android:textColor="@color/lightBlue"
                 android:text="Mass : "/>
 

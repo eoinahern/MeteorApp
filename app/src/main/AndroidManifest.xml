@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:name=".MeteorApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".Presentation.View.MainActivity">
+        <activity android:name=".Presentation.View.MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

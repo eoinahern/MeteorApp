@@ -44,6 +44,7 @@ public class MeteorRecviewAdpt extends RecyclerView.Adapter<MeteorRecviewAdpt.Me
         holder.date.setText(dateformatter.shortenFormat(meteor.getYear()));
         holder.mass.setText(String.valueOf(meteor.getMass()));
         holder.location.setText(stringFormatter.abbreviateString(meteor.getName()));
+        holder.squaretxt.setText(meteor.getName().substring(0,1));
     }
 
     @Override
@@ -53,6 +54,8 @@ public class MeteorRecviewAdpt extends RecyclerView.Adapter<MeteorRecviewAdpt.Me
 
     public class MeteorViewHolder extends RecyclerView.ViewHolder {
 
+
+        @BindView(R.id.square_txt) TextView squaretxt;
         @BindView(R.id.nametxt) TextView location;
         @BindView(R.id.masstxt) TextView mass;
         @BindView(R.id.datetxt) TextView date;
