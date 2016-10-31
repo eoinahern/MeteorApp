@@ -6,11 +6,6 @@ package com.example.eoin_a.meteorapp.Presentation.Utils;
 
 public class StringFormatter {
 
-    public StringFormatter()
-    {
-
-    }
-
 
     public String abbreviateString(String title)
     {
@@ -22,8 +17,8 @@ public class StringFormatter {
         return title.substring(0,11) + "...";
     }
 
-    public char getFirstChar(String name)
+    public String getFirstChar(String name)
     {
-        return name.charAt(0);
+        return name.substring(0,1);
     }
 }

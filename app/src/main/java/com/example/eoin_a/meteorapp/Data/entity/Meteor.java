@@ -11,6 +11,7 @@ import io.realm.annotations.RealmClass;
 
 /**
  * Created by eoin_a on 24/10/2016.
+ *
  */
 
 public class Meteor extends RealmObject implements Comparable<Meteor>, Parcelable {
