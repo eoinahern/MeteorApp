@@ -16,6 +16,8 @@ import butterknife.ButterKnife;
 
 /**
  * Created by eoin_a on 29/10/2016.
+ *
+ *
  */
 public class MeteorRecviewAdpt extends RecyclerView.Adapter<MeteorRecviewAdpt.MeteorViewHolder> {
 
