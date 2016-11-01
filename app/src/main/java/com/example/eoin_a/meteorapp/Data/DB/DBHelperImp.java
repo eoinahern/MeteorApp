@@ -40,7 +40,6 @@ public class DBHelperImp implements DBHelper {
         }
 
         return Observable.just(mylist);
-
     }
 
     @Override
@@ -56,12 +55,9 @@ public class DBHelperImp implements DBHelper {
         return realm.isEmpty();
     }
 
-
     @Override
     public void closeDB() {
         realm.close();
     }
-
-
 
 }

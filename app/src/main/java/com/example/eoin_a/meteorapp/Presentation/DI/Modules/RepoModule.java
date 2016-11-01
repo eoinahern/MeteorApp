@@ -9,6 +9,8 @@ import com.example.eoin_a.meteorapp.Data.Web.Service;
 import com.example.eoin_a.meteorapp.Data.Web.ServiceImp;
 import com.example.eoin_a.meteorapp.Domain.MeteorRepo;
 import com.example.eoin_a.meteorapp.Presentation.DI.Ascope;
+import com.example.eoin_a.meteorapp.Presentation.Navigation.NavigationCommand;
+import com.example.eoin_a.meteorapp.Presentation.Navigation.ToMapActivity;
 import com.example.eoin_a.meteorapp.Presentation.Utils.NetworkStateHelper;
 
 import javax.inject.Named;
@@ -70,4 +72,6 @@ public class RepoModule {
     {
         return new MeteorRepoImp(dbhelper, service, nethelper, mainsched, newscheduler);
     }
+
+
 }

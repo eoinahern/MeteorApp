@@ -6,6 +6,8 @@ import com.example.eoin_a.meteorapp.Data.entity.Meteor;
 import com.example.eoin_a.meteorapp.Domain.MeteorRepo;
 import com.example.eoin_a.meteorapp.Presentation.Contract.MainPresenter;
 import com.example.eoin_a.meteorapp.Presentation.Contract.MainView;
+import com.example.eoin_a.meteorapp.Presentation.Navigation.NavigationCommand;
+import com.example.eoin_a.meteorapp.Presentation.Navigation.ToMapActivity;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,11 +25,13 @@ public class MeteorPresenter implements MainPresenter {
 
     private MainView mview;
     private MeteorRepo  mrepo;
+    private NavigationCommand mapnavigation;
 
     @Inject
     public MeteorPresenter(@Named("meteorrepo") MeteorRepo mrepo)
     {
         this.mrepo = mrepo;
+
     }
 
     public void setView(MainView mview)

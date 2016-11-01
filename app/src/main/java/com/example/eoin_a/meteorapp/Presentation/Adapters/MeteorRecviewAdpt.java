@@ -2,11 +2,13 @@ package com.example.eoin_a.meteorapp.Presentation.Adapters;
 
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.eoin_a.meteorapp.Data.entity.Meteor;
+import com.example.eoin_a.meteorapp.Presentation.Listeners.ItemClicked;
 import com.example.eoin_a.meteorapp.Presentation.Utils.DateFormatter;
 import com.example.eoin_a.meteorapp.Presentation.Utils.StringFormatter;
 import com.example.eoin_a.meteorapp.R;
@@ -22,12 +24,14 @@ public class MeteorRecviewAdpt extends RecyclerView.Adapter<MeteorRecviewAdpt.Me
     private List<Meteor> meteorlist;
     private StringFormatter stringFormatter;
     private DateFormatter dateformatter;
+    private ItemClicked itclicked;
 
-    public MeteorRecviewAdpt(List<Meteor> meteorlist) {
+    public MeteorRecviewAdpt(List<Meteor> meteorlist, ItemClicked itclicked) {
 
         this.meteorlist = meteorlist;
         this.stringFormatter = new StringFormatter();
         this.dateformatter = new DateFormatter();
+        this.itclicked = itclicked;
     }
 
     @Override
@@ -52,7 +56,7 @@ public class MeteorRecviewAdpt extends RecyclerView.Adapter<MeteorRecviewAdpt.Me
         return meteorlist.size();
     }
 
-    public class MeteorViewHolder extends RecyclerView.ViewHolder {
+    public class MeteorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         @BindView(R.id.square_txt) TextView squaretxt;
@@ -61,9 +65,15 @@ public class MeteorRecviewAdpt extends RecyclerView.Adapter<MeteorRecviewAdpt.Me
         @BindView(R.id.datetxt) TextView date;
 
         public MeteorViewHolder(View view) {
-
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Log.d("item selected", "item");
+            itclicked.viewClicked(v, getAdapterPosition());
         }
     }
 }
