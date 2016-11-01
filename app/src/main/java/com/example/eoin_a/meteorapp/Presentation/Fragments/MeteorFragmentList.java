@@ -65,7 +65,7 @@ public class MeteorFragmentList extends Fragment implements MainView, ItemClicke
 
         repocomp.inject(this);
         llmanager = new LinearLayoutManager(getActivity().getBaseContext());
-        tomapnaigation = new ToMapActivity(getActivity());
+
     }
 
 
@@ -120,8 +120,10 @@ public class MeteorFragmentList extends Fragment implements MainView, ItemClicke
 
 
     @Override
-    public void viewClicked(View v, int position) {
-        Log.d("item clicked", String.valueOf(position));
+    public void viewClicked(View v, int pos) {
+        Log.d("item clicked", String.valueOf(pos));
+
+        tomapnaigation = new ToMapActivity(getActivity(), mlist.get(pos));
         tomapnaigation.navigate();
     }
 }
