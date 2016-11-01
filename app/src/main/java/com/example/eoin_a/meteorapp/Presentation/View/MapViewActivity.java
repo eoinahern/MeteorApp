@@ -24,7 +24,6 @@ public class MapViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map_view);
         ButterKnife.bind(this);
 
-
         Intent i = getIntent();
         meteor = i.getParcelableExtra(ToMapActivity.METEOR_INST);
         name.setText(meteor.getName());
