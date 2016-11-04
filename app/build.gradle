@@ -21,7 +21,20 @@ android {
         }
     }
 
+    productFlavors {
+        prod {
 
+        }
+        mock {
+            applicationId "eom.example.eoin_a.mock"
+        }
+    }
+
+
+    sourceSets {
+        mock { java.srcDirs = ['src/mock/java', 'src/mock/java/'] }
+        prod { java.srcDirs = ['src/prod/java', 'src/prod/java/'] }
+    }
 }
 
 dependencies {

@@ -10,7 +10,6 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -20,10 +19,8 @@ import java.util.concurrent.TimeUnit;
 import retrofit2.Call;
 import rx.Observable;
 import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
-import rx.schedulers.TestScheduler;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

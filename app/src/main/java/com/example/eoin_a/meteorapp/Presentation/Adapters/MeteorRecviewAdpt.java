@@ -45,6 +45,7 @@ public class MeteorRecviewAdpt extends RecyclerView.Adapter<MeteorRecviewAdpt.Me
 
         Meteor meteor = meteorlist.get(pos);
 
+
         holder.date.setText(dateformatter.shortenFormat(meteor.getYear()));
         holder.mass.setText(String.valueOf(meteor.getMass()));
         holder.location.setText(stringFormatter.abbreviateString(meteor.getName()));
