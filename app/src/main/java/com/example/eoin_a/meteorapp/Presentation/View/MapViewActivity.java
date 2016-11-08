@@ -1,6 +1,8 @@
 package com.example.eoin_a.meteorapp.Presentation.View;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -19,9 +21,11 @@ import butterknife.ButterKnife;
 
 public class MapViewActivity extends AppCompatActivity  implements OnMapReadyCallback {
 
-    @BindView(R.id.name_txt) TextView name;
+    //@BindView(R.id.name_txt) TextView name;
     private Meteor meteor;
     private SupportMapFragment mapfrag;
+    private DetailsFragment detailsfrag;
+    private FragmentManager fragmanager;
 
 
     @Override
@@ -31,7 +35,7 @@ public class MapViewActivity extends AppCompatActivity  implements OnMapReadyCal
         ButterKnife.bind(this);
 
         getMeteor();
-        name.setText(meteor.getName());
+        loadCardFrag();
         loadMap();
     }
 
@@ -46,6 +50,14 @@ public class MapViewActivity extends AppCompatActivity  implements OnMapReadyCal
         mapfrag = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapfrag.getMapAsync(this);
+    }
+
+    private void loadCardFrag()
+    {
+        detailsfrag = DetailsFragment.getInst(meteor);
+        fragmanager = getSupportFragmentManager();
+        FragmentTransaction fragtrans = fragmanager.beginTransaction();
+        fragtrans.add(R.id.cardview, detailsfrag).commit();
     }
 
     @Override
