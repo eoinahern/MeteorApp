@@ -81,6 +81,14 @@ public class Meteor extends RealmObject implements Comparable<Meteor>, Parcelabl
         this.year = year;
     }
 
+    public String getReclat() {
+        return reclat;
+    }
+
+    public String getReclong() {
+        return reclong;
+    }
+
     @Override
     public int describeContents() {
         return 0;

@@ -23,13 +23,6 @@
                 android:layout_centerInParent="true">
 
 
-                <!--<TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/name_initial"
-                    android:text="booo!!!"
-                    android:layout_marginRight="5dp"/>-->
-
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="60dp"
@@ -64,12 +57,20 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/massimg"
+                    android:background="@drawable/ic_weight_light"
+                    android:layout_marginRight="5dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="boo!!"
+                android:layout_marginLeft="5dp"
                 android:id="@+id/masstxt"
-                android:textSize="25dp"/>
+                android:textSize="22dp"/>
 
             </LinearLayout>
 
@@ -85,12 +86,65 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/yearimg"
+                    android:background="@drawable/ic_calendar_light"
+                    android:layout_marginRight="5dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="boo!!"
+                android:layout_marginLeft="5dp"
                 android:id="@+id/yeartxt"
-                android:textSize="25dp"/>
+                android:textSize="22dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/latlonimg"
+                    android:background="@drawable/ic_location_light"
+                    android:layout_marginRight="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="lat"
+                    android:id="@+id/lattxt"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="22dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=","
+                    android:layout_marginLeft="5dp"
+                    android:textSize="22dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="long"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/longtxt"
+                    android:textSize="22dp"/>
 
             </LinearLayout>
 

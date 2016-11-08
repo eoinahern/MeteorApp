@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.eoin_a.meteorapp.Data.entity.Meteor;
 import com.example.eoin_a.meteorapp.Presentation.Navigation.ToMapActivity;
 import com.example.eoin_a.meteorapp.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -21,7 +22,6 @@ import butterknife.ButterKnife;
 
 public class MapViewActivity extends AppCompatActivity  implements OnMapReadyCallback {
 
-    //@BindView(R.id.name_txt) TextView name;
     private Meteor meteor;
     private SupportMapFragment mapfrag;
     private DetailsFragment detailsfrag;
@@ -62,6 +62,18 @@ public class MapViewActivity extends AppCompatActivity  implements OnMapReadyCal
 
     @Override
     public void onMapReady(GoogleMap map) {
-        map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+
+       LatLng latlong =  getLatlong();
+        map.addMarker(new MarkerOptions().position(latlong).title("Marker"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(latlong));
     }
+
+    private LatLng getLatlong()
+    {
+        LatLng latlong =  new LatLng(Double.valueOf(meteor.getReclat()),
+                Double.valueOf(meteor.getReclong()));
+
+        return latlong;
+    }
+
 }
