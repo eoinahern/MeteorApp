@@ -10,17 +10,17 @@ import com.example.eoin_a.meteorapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MeteorFragmentList meteorlistfrag;
-    private FragmentManager fragmanager;
+	private MeteorFragmentList meteorlistfrag;
+	private FragmentManager fragmanager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
-        meteorlistfrag = MeteorFragmentList.getInst();
-        fragmanager = getSupportFragmentManager();
-        FragmentTransaction fragtrans = fragmanager.beginTransaction();
-        fragtrans.add(R.id.activity_main, meteorlistfrag).commit();
-    }
+		meteorlistfrag = MeteorFragmentList.getInst();
+		fragmanager = getSupportFragmentManager();
+		FragmentTransaction fragtrans = fragmanager.beginTransaction();
+		fragtrans.add(R.id.activity_main, meteorlistfrag).commit();
+	}
 }

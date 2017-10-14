@@ -11,17 +11,11 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
-/**
- * Created by eoin_a on 24/10/2016.
- */
-
 public interface Service {
 
-    //could hide token. no need at present
+	//could hide token. no need at present
 
-    @Headers("X-App-Token: mZyaAGNlMXuvvJlqBqsCzdPDX")
-    @GET("y77d-th95.json")
-    Observable<List<Meteor>> getMeteors(@Query("$where") String query);
-
-
+	@Headers("X-App-Token: mZyaAGNlMXuvvJlqBqsCzdPDX")
+	@GET("y77d-th95.json")
+	Observable<List<Meteor>> getMeteors(@Query("$where") String query);
 }

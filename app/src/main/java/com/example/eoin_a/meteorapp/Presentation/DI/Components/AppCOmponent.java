@@ -9,12 +9,8 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
-/**
- * Created by eoin_a on 28/10/2016.
- */
-
 
 @Component(modules = AppModule.class)
 public interface AppComponent {
-    Context cont();
+	Context cont();
 }

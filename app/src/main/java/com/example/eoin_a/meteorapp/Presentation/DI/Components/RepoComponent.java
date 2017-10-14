@@ -6,12 +6,8 @@ import com.example.eoin_a.meteorapp.Presentation.Fragments.MeteorFragmentList;
 
 import dagger.Component;
 
-/**
- * Created by eoin_a on 29/10/2016.
- */
 
-
-@Component(modules = RepoModule.class, dependencies = AppComponent.class )
+@Component(modules = RepoModule.class, dependencies = AppComponent.class)
 public interface RepoComponent {
-    void inject(MeteorFragmentList meteorfrag);
+	void inject(MeteorFragmentList meteorfrag);
 }

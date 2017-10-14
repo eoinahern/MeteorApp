@@ -23,58 +23,53 @@ import rx.Subscriber;
 
 public class MeteorPresenter implements MainPresenter {
 
-    private MainView mview;
-    private MeteorRepo  mrepo;
-    private NavigationCommand mapnavigation;
+	private MainView mview;
+	private MeteorRepo mrepo;
+	private NavigationCommand mapnavigation;
 
-    @Inject
-    public MeteorPresenter(@Named("meteorrepo") MeteorRepo mrepo)
-    {
-        this.mrepo = mrepo;
+	@Inject
+	public MeteorPresenter(@Named("meteorrepo") MeteorRepo mrepo) {
+		this.mrepo = mrepo;
 
-    }
+	}
 
-    public void setView(MainView mview)
-    {
-        this.mview = mview;
-    }
+	public void setView(MainView mview) {
+		this.mview = mview;
+	}
 
-    public void GetMeteorList()
-    {
-        mrepo.subscribe(new MeteorSubscriber());
-    }
+	public void GetMeteorList() {
+		mrepo.subscribe(new MeteorSubscriber());
+	}
 
 
-    public class MeteorSubscriber extends Subscriber<List<Meteor>>
-    {
-        @Override
-        public void onCompleted() {
-            mview.showloading(false);
-        }
+	public class MeteorSubscriber extends Subscriber<List<Meteor>> {
+		@Override
+		public void onCompleted() {
+			mview.showloading(false);
+		}
 
-        @Override
-        public void onError(Throwable e) {
-            e.printStackTrace();
-            mview.showError();
-        }
+		@Override
+		public void onError(Throwable e) {
+			e.printStackTrace();
+			mview.showError();
+		}
 
-        @Override
-        public void onNext(List<Meteor> meteors) {
+		@Override
+		public void onNext(List<Meteor> meteors) {
 
-            Log.d("len", String.valueOf(meteors.size()));
+			Log.d("len", String.valueOf(meteors.size()));
 
-            if(mrepo.checkEmpty())
-                mrepo.saveData(meteors);
+			if (mrepo.checkEmpty())
+				mrepo.saveData(meteors);
 
-            Collections.sort(meteors, Collections.reverseOrder());
-            mview.displayMeteorList(meteors);
-        }
-    }
+			Collections.sort(meteors, Collections.reverseOrder());
+			mview.displayMeteorList(meteors);
+		}
+	}
 
 
-    public void Unsubscribe()
-    {
-        mrepo.unsubscribe();
-    }
+	public void Unsubscribe() {
+		mrepo.unsubscribe();
+	}
 
 }

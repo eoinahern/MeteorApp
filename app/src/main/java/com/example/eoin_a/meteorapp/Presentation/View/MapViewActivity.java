@@ -20,60 +20,57 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MapViewActivity extends AppCompatActivity  implements OnMapReadyCallback {
+public class MapViewActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private Meteor meteor;
-    private SupportMapFragment mapfrag;
-    private DetailsFragment detailsfrag;
-    private FragmentManager fragmanager;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_view);
-        ButterKnife.bind(this);
-
-        getMeteor();
-        loadCardFrag();
-        loadMap();
-    }
+	private Meteor meteor;
+	private SupportMapFragment mapfrag;
+	private DetailsFragment detailsfrag;
+	private FragmentManager fragmanager;
 
 
-    private void getMeteor() {
-        Intent i = getIntent();
-        meteor = i.getParcelableExtra(ToMapActivity.METEOR_INST);
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_map_view);
+		ButterKnife.bind(this);
 
-    private void loadMap()
-    {
-        mapfrag = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapfrag.getMapAsync(this);
-    }
+		getMeteor();
+		loadCardFrag();
+		loadMap();
+	}
 
-    private void loadCardFrag()
-    {
-        detailsfrag = DetailsFragment.getInst(meteor);
-        fragmanager = getSupportFragmentManager();
-        FragmentTransaction fragtrans = fragmanager.beginTransaction();
-        fragtrans.add(R.id.cardview, detailsfrag).commit();
-    }
 
-    @Override
-    public void onMapReady(GoogleMap map) {
+	private void getMeteor() {
+		Intent i = getIntent();
+		meteor = i.getParcelableExtra(ToMapActivity.METEOR_INST);
+	}
 
-       LatLng latlong =  getLatlong();
-        map.addMarker(new MarkerOptions().position(latlong).title("Marker"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(latlong));
-    }
+	private void loadMap() {
+		mapfrag = (SupportMapFragment) getSupportFragmentManager()
+				.findFragmentById(R.id.map);
+		mapfrag.getMapAsync(this);
+	}
 
-    private LatLng getLatlong()
-    {
-        LatLng latlong =  new LatLng(Double.valueOf(meteor.getReclat()),
-                Double.valueOf(meteor.getReclong()));
+	private void loadCardFrag() {
+		detailsfrag = DetailsFragment.getInst(meteor);
+		fragmanager = getSupportFragmentManager();
+		FragmentTransaction fragtrans = fragmanager.beginTransaction();
+		fragtrans.add(R.id.cardview, detailsfrag).commit();
+	}
 
-        return latlong;
-    }
+	@Override
+	public void onMapReady(GoogleMap map) {
+
+		LatLng latlong = getLatlong();
+		map.addMarker(new MarkerOptions().position(latlong).title("Marker"));
+		map.moveCamera(CameraUpdateFactory.newLatLng(latlong));
+	}
+
+	private LatLng getLatlong() {
+		LatLng latlong = new LatLng(Double.valueOf(meteor.getReclat()),
+				Double.valueOf(meteor.getReclong()));
+
+		return latlong;
+	}
 
 }

@@ -13,21 +13,19 @@ import javax.inject.Inject;
 
 public class NetworkStateHelper {
 
-    private Context cont;
-    private ConnectivityManager cm;
+	private Context cont;
+	private ConnectivityManager cm;
 
 
-    @Inject
-    public NetworkStateHelper(Context cont)
-    {
-        this.cont = cont;
-        cm = (ConnectivityManager) cont.getSystemService(Context.CONNECTIVITY_SERVICE);
-    }
+	@Inject
+	public NetworkStateHelper(Context cont) {
+		this.cont = cont;
+		cm = (ConnectivityManager) cont.getSystemService(Context.CONNECTIVITY_SERVICE);
+	}
 
 
-    public boolean checkNetworkConnected()
-    {
-        NetworkInfo netinfo = cm.getActiveNetworkInfo();
-        return  netinfo != null && netinfo.isConnectedOrConnecting();
-    }
+	public boolean checkNetworkConnected() {
+		NetworkInfo netinfo = cm.getActiveNetworkInfo();
+		return netinfo != null && netinfo.isConnectedOrConnecting();
+	}
 }

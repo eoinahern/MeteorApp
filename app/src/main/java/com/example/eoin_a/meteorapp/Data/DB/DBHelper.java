@@ -8,15 +8,15 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 
-/**
- * Created by eoin_a on 24/10/2016.
- */
 
 public interface DBHelper {
 
-    Observable<List<Meteor>> getMeteorList();
-    void saveMeteorList(List<Meteor> meteorlist);
-    boolean checkEmpty();
-    void closeDB();
+	Observable<List<Meteor>> getMeteorList();
+
+	void saveMeteorList(List<Meteor> meteorlist);
+
+	boolean checkEmpty();
+
+	void closeDB();
 
 }

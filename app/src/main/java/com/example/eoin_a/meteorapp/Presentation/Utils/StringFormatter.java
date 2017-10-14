@@ -7,18 +7,15 @@ package com.example.eoin_a.meteorapp.Presentation.Utils;
 public class StringFormatter {
 
 
-    public String abbreviateString(String title)
-    {
-        if(title.length() <= 15)
-        {
-           return title;
-        }
+	public String abbreviateString(String title) {
+		if (title.length() <= 15) {
+			return title;
+		}
 
-        return title.substring(0,11) + "...";
-    }
+		return title.substring(0, 11) + "...";
+	}
 
-    public String getFirstChar(String name)
-    {
-        return name.substring(0,1);
-    }
+	public String getFirstChar(String name) {
+		return name.substring(0, 1);
+	}
 }
