@@ -1,5 +1,15 @@
 # MeteorApp
-using nasa's data on all meteor collisions with earth since 2011
+using nasa's data on all meteor collisions with earth since 2011.
+
+first screen
+
+sorts data and displays in sequential order from largest to smallest mass of the meteorite In a recyclerview.
+
+Second screen
+
+displays relevant date of the meteorite. including geolocation. a google map of with a pin locating where it landed, mass etc.
+
+Architecture Overview
 
 Broke down the application into 3 layers. Data, Domain, Presentation. this is essentially a variation on DDD. 
 
