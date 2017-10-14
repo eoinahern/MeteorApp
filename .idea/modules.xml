@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MeteorApp.iml" filepath="$PROJECT_DIR$/MeteorApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bollox/bollox.iml" filepath="$PROJECT_DIR$/bollox/bollox.iml" />
     </modules>
   </component>
 </project>
